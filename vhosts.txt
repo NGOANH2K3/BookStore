@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+DocumentRoot "D:/xampp/htdocs"
+ServerName localhost
+</VirtualHost>
+<VirtualHost *:80>
+DocumentRoot "D:/xampp/app/bookstore/public"
+ServerName bookstore.localhost
+# Set access permission
+<Directory "D:/xampp/app/bookstore/public">
+Options Indexes FollowSymLinks Includes ExecCGI
+AllowOverride All
+Require all granted
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</Directory>
+</VirtualHost>
+
+- Cài đặt Project:
+
++ Tải code về
+
++ Mở thư mục cài đặt XAMPP ( thường là ổ C hoặc D), tạo thư mục mới chứa code vừa tải về, ví dụ là thư mục 'app'
+
++ Vào apache/conf/extra/httpd-vhosts.conf và copy paste nội dung trong file vhosts đính kèm trong thư mục chứa code vừa tải về. Tùy chỉnh DocumentRoot và Directory cho phù hợp.
+
++ Mở PHPMyAdmin và tạo mới database tên 'bookstore', sau đó nhập dữ liệu từ file bookstore.sql đính kèm trong code vừa tải về.
+
++ Sau khi thực hiện thành công các bước trên thì start lại apache, truy cập vào bookstore.localhost để truy cập web.
